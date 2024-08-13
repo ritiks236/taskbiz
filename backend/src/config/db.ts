@@ -1,7 +1,9 @@
 import mongoose from "mongoose";
-import endpoint from "../endpoint.config";
+import dotenv from "dotenv";
 
-const dburl = endpoint.MONGO_URI;
+dotenv.config();
+
+const dburl: string = process.env.DB_URL || "";
 
 const connectDB = async () => {
   try {
