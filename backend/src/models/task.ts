@@ -1,14 +1,20 @@
 import mongoose, { Document, Schema } from "mongoose";
 
 interface TaskProps extends Document {
+  userId: mongoose.Schema.Types.ObjectId;
   title: string;
-  description: string;
+  description?: string;
   status: Boolean;
   createdAt: Date;
   dueDate: Date;
 }
 
 const TaskSchema = new Schema<TaskProps>({
+  userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+    required: true,
+  },
   title: {
     type: String,
     required: true,
@@ -30,4 +36,5 @@ const TaskSchema = new Schema<TaskProps>({
   },
 });
 
-module.exports = mongoose.model<TaskProps>("Task", TaskSchema);
+const Task = mongoose.model<TaskProps>("Task", TaskSchema);
+export default Task;
